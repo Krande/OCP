@@ -1,0 +1,48 @@
+[project]
+name = "ocp-build"
+version = "7.8.1"
+description = "Python wrapper for OCCT generated using pywrap"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64"]
+
+[environments]
+common = { features = ["common"], no-default-feature = true }
+novtk = { features = ["novtk", "common"], no-default-feature = true }
+all = { features = ["all", "common"], no-default-feature = true }
+
+[feature.common.dependencies]
+pybind11 = "2.12.*"
+boost-cpp = "1.84.*"
+cmake = ">3.24"
+ninja = "*"
+clangdev = "19.*"
+python-clang = "*"
+py-lief = "*"
+joblib = "*"
+toml = "*"
+click = "*"
+jinja2 = "*"
+logzero = "*"
+pandas ="<2"
+path = "*"
+pyparsing = "*"
+schema = "*"
+tqdm = "*"
+toposort = "*"
+
+[feature.common.target.win-64.dependencies]
+tbb-devel = "*"
+
+[feature.common.pypi-dependencies]
+pybind11-stubgen = { git = "https://github.com/CadQuery/pybind11-stubgen.git", branch = "master" }
+pywrap = { path = "./pywrap", editable = true }
+
+
+[feature.novtk.dependencies]
+occt = { version = "7.8.*", build = "*novtk*" }
+
+[feature.all.dependencies]
+occt = { version = "7.8.*", build = "*all*" }
+
+[feature.novtk.target.win-64.tasks]
+pywrap = { cmd = ["pywrap", "-i", "$CONDA_PREFIX/Library/include", "-l","$CONDA_PREFIX/Library/bin/libclang-13.dll", "all", "ocp_novtk.toml"] }
