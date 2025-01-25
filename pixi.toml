@@ -16,7 +16,6 @@ boost-cpp = "1.84.*"
 cmake = ">3.24"
 ninja = "*"
 clangdev = "19.*"
-python-clang = "*"
 py-lief = "*"
 joblib = "*"
 toml = "*"
@@ -36,7 +35,6 @@ tbb-devel = "*"
 [feature.common.pypi-dependencies]
 pybind11-stubgen = { git = "https://github.com/CadQuery/pybind11-stubgen.git", branch = "master" }
 pywrap = { path = "./pywrap", editable = true }
-
 
 [feature.novtk.dependencies]
 occt = { version = "7.8.*", build = "*novtk*" }
