@@ -28,6 +28,7 @@ pyparsing = "*"
 schema = "*"
 tqdm = "*"
 toposort = "*"
+python-clang = "*"
 
 [feature.common.target.win-64.dependencies]
 tbb-devel = "*"
@@ -44,3 +45,7 @@ occt = { version = "7.8.*", build = "*all*" }
 
 [feature.novtk.target.win-64.tasks]
 pywrap = { cmd = ["pywrap", "-i", "$CONDA_PREFIX/Library/include", "-l","$CONDA_PREFIX/Library/bin/libclang-13.dll", "all", "ocp_novtk.toml"] }
+
+pywrap-parse = { cmd = ["pywrap","-i", "$CONDA_PREFIX/Library/include", "-l","$CONDA_PREFIX/Library/bin/libclang-13.dll",  "parse", "ocp_novtk.toml", "out.pkl"] }
+pywrap-transform = { cmd = ["pywrap", "transform", "ocp_novtk.toml", "out.pkl", "out_f.pkl"] }
+pywrap-generate = { cmd = ["pywrap", "generate", "ocp_novtk.toml", "out_f.pkl"] }
