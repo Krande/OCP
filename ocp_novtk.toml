@@ -374,7 +374,7 @@ class Adaptor3d_Surface;
 [Windows]
     modules = ["WNT"]
     exclude_classes = ["Handle_*"]
-    symbols = "symbols_mangled_win.dat"
+    symbols = "pywrap/symbols_mangled_win.dat"
 
 [OSX]
     modules = ["Cocoa"]

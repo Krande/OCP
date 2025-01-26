@@ -2,3 +2,6 @@
 .pixi
 tmp.pkl
 new/
+out*.pkl
+build/
+OCP/

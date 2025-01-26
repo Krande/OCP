@@ -15,6 +15,7 @@ pybind11 = "2.12.*"
 boost-cpp = "1.84.*"
 cmake = ">3.24"
 ninja = "*"
+clang = "19.*"
 clangdev = "19.*"
 py-lief = "*"
 joblib = "*"
@@ -44,8 +45,10 @@ occt = { version = "7.8.*", build = "*novtk*" }
 occt = { version = "7.8.*", build = "*all*" }
 
 [feature.novtk.target.win-64.tasks]
-pywrap = { cmd = ["pywrap", "-i", "$CONDA_PREFIX/Library/include", "-l","$CONDA_PREFIX/Library/bin/libclang-13.dll", "all", "ocp_novtk.toml"] }
-
+pywrap-all = { cmd = ["pywrap", "-i", "$CONDA_PREFIX/Library/include", "-l","$CONDA_PREFIX/Library/bin/libclang-13.dll", "all", "ocp_novtk.toml"] }
 pywrap-parse = { cmd = ["pywrap","-i", "$CONDA_PREFIX/Library/include", "-l","$CONDA_PREFIX/Library/bin/libclang-13.dll",  "parse", "ocp_novtk.toml", "out.pkl"] }
 pywrap-transform = { cmd = ["pywrap", "transform", "ocp_novtk.toml", "out.pkl", "out_f.pkl"] }
 pywrap-generate = { cmd = ["pywrap", "generate", "ocp_novtk.toml", "out_f.pkl"] }
+
+build = { cmd = ["cmake","-G","Ninja", "-S", "OCP", "-B", "build","-DPython3_FIND_STRATEGY=LOCATION", "-DPython3_ROOT_DIR=$CONDA_PREFIX","-DCMAKE_LINKER=lld-link.exe","-DCMAKE_MODULE_LINKER_FLAGS=\"/machine:x64 /FORCE:MULTIPLE\"","-DCMAKE_BUILD_TYPE=Release","-DNOVTK=ON"] }
+install = { cmd = ["cmake", "--build", "build"] }
